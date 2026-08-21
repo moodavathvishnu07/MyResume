@@ -1,0 +1,8 @@
+# MeraResume Robots.txt for Googlebot & Web Crawlers
+User-agent: *
+Allow: /
+Allow: /resume
+Allow: /smartresume
+
+# XML Sitemap URL
+Sitemap: https://meraresume.onrender.com/sitemap.xml
