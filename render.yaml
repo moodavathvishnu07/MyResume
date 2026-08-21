@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: myresume-app
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /api/health
