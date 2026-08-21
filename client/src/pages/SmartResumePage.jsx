@@ -139,7 +139,7 @@ JavaScript, TypeScript, React, Next.js, Node.js, GraphQL, PostgreSQL, Redis, Doc
                 <i className="bi bi-file-earmark-person-fill" style={{ fontSize: '15px' }}></i>
               </div>
               <span className="fw-extrabold text-dark tracking-tight" style={{ fontWeight: 800, fontSize: '1.1rem' }}>
-                my<span style={{ color: '#ff6b00' }}>Resume</span>
+                mera<span style={{ color: '#ff6b00' }}>Resume</span>
               </span>
             </div>
 

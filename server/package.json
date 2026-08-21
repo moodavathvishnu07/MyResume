@@ -1,7 +1,7 @@
 {
-  "name": "resume-builder-server",
+  "name": "mera-resume-server",
   "version": "1.0.0",
-  "description": "Express backend for Resume & CV Builder",
+  "description": "Express backend for MeraResume Studio",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

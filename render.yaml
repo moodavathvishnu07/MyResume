@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: myresume-app
+    name: meraresume
     runtime: docker
     plan: free
     region: singapore

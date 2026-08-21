@@ -259,7 +259,7 @@ export function BuilderPage({
                 <i className="bi bi-file-earmark-person-fill" style={{ fontSize: '15px' }}></i>
               </div>
               <span className="fw-extrabold text-dark tracking-tight" style={{ fontWeight: 800, fontSize: '1.05rem' }}>
-                my<span style={{ color: '#ff6b00' }}>Resume</span>
+                mera<span style={{ color: '#ff6b00' }}>Resume</span>
               </span>
             </div>
 

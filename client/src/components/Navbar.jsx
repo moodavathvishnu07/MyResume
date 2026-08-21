@@ -56,7 +56,7 @@ export function Navbar({
           <div>
             <div className="d-flex align-items-center gap-2">
               <span className="fw-extrabold fs-5 text-dark tracking-tight" style={{ fontWeight: 800 }}>
-                my<span style={{ color: '#ff6b00' }}>Resume</span>
+                mera<span style={{ color: '#ff6b00' }}>Resume</span>
               </span>
               <span
                 className="badge rounded-pill fw-bold font-monospace"

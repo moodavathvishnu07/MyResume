@@ -102,37 +102,37 @@ const TEMPLATES_SHOWCASE = [
 const COMPARISON_FEATURES = [
   {
     feature: 'Universal ATS 100% Compatibility',
-    myResume: 'Guaranteed 98%+ Pass',
+    meraResume: 'Guaranteed 98%+ Pass',
     generic: 'Partial / Often Fails',
     word: 'Unformatted'
   },
   {
     feature: 'Active Clickable Links in PDF & Word',
-    myResume: 'Live Clickable Links',
+    meraResume: 'Live Clickable Links',
     generic: 'Plain Text Only',
     word: 'Manual Setup'
   },
   {
     feature: 'Multi-Format Hub (PDF, DOCX, CSV)',
-    myResume: 'Instant 1-Click All',
+    meraResume: 'Instant 1-Click All',
     generic: 'PDF Paywall Only',
     word: 'DOCX Only'
   },
   {
     feature: 'AI Bullet Enhancer & Metrics',
-    myResume: 'Built-in Free',
+    meraResume: 'Built-in Free',
     generic: '$20/mo Paid Addon',
     word: 'Not Available'
   },
   {
     feature: 'Direct On-Canvas Line Editing',
-    myResume: 'Click Any Line to Edit',
+    meraResume: 'Click Any Line to Edit',
     generic: 'Rigid Forms Only',
     word: 'Manual Dragging'
   },
   {
     feature: '100% Free Export (No Watermark)',
-    myResume: 'No Watermarks Ever',
+    meraResume: 'No Watermarks Ever',
     generic: 'Hidden Paywalls',
     word: 'Free'
   }
@@ -141,7 +141,7 @@ const COMPARISON_FEATURES = [
 const FAQS = [
   {
     q: 'Will my hyperlinks remain clickable when I export to PDF or Word?',
-    a: 'Yes! myResume preserves all external links (LinkedIn, GitHub, custom Portfolio, Project URLs, email mailto, and phone tel links) as fully active, clickable hyperlinks in both exported PDFs and Microsoft Word (.DOCX) documents.'
+    a: 'Yes! MeraResume preserves all external links (LinkedIn, GitHub, custom Portfolio, Project URLs, email mailto, and phone tel links) as fully active, clickable hyperlinks in both exported PDFs and Microsoft Word (.DOCX) documents.'
   },
   {
     q: 'How does the ATS Score calculation work?',
@@ -226,18 +226,10 @@ export function LandingPage({ onSelectTemplate, onSelectSample, onOpenSmartParse
             </div>
             <div className="d-flex align-items-center gap-1">
               <span className="fw-extrabold text-dark tracking-tight" style={{ fontWeight: 800, fontSize: 'clamp(1.1rem, 4vw, 1.35rem)' }}>
-                my<span style={{ color: '#ff6b00' }}>Resume</span>
+                mera<span style={{ color: '#ff6b00' }}>Resume</span>
               </span>
-              <span
-                className="badge rounded-pill fw-bold font-monospace d-none d-sm-inline-block"
-                style={{
-                  backgroundColor: 'rgba(255, 107, 0, 0.12)',
-                  color: '#ff6b00',
-                  border: '1px solid rgba(255, 107, 0, 0.25)',
-                  fontSize: '9px'
-                }}
-              >
-                PRO ATS
+              <span className="badge bg-warning bg-opacity-15 text-orange-dark border fw-bold font-monospace d-none d-sm-inline" style={{ fontSize: '10px', borderColor: 'rgba(255, 107, 0, 0.25)' }}>
+                ATS 98%
               </span>
             </div>
           </div>
@@ -547,7 +539,7 @@ export function LandingPage({ onSelectTemplate, onSelectSample, onOpenSmartParse
               The Advantage
             </span>
             <h2 className="h4 h2-md fw-bold text-dark tracking-tight mb-1.5">
-              Why myResume Outperforms Old Builders
+              Why MeraResume Outperforms Old Builders
             </h2>
             <p className="text-secondary small mb-0">
               Direct comparison against generic web builders and basic Word document templates.
@@ -567,9 +559,9 @@ export function LandingPage({ onSelectTemplate, onSelectSample, onOpenSmartParse
 
                 <div className="d-flex flex-column gap-1.5 small">
                   <div className="d-flex align-items-center justify-content-between p-2 rounded-3" style={{ backgroundColor: 'rgba(255, 107, 0, 0.08)' }}>
-                    <span className="fw-bold" style={{ color: '#c2410c', fontSize: '12px' }}>myResume PRO</span>
+                    <span className="fw-bold" style={{ color: '#c2410c', fontSize: '12px' }}>MeraResume PRO</span>
                     <span className="fw-bold d-flex align-items-center gap-1" style={{ color: '#ff6b00', fontSize: '11.5px' }}>
-                      <CheckCircle2 size={14} /> {item.myResume}
+                      <CheckCircle2 size={14} /> {item.meraResume}
                     </span>
                   </div>
 
@@ -594,7 +586,7 @@ export function LandingPage({ onSelectTemplate, onSelectSample, onOpenSmartParse
                 <tr>
                   <th className="py-3 px-4 text-dark fw-bold" style={{ width: '40%' }}>Core Capabilities</th>
                   <th className="py-3 px-3 text-center fw-bold" style={{ width: '30%', color: '#ff6b00', backgroundColor: 'rgba(255, 107, 0, 0.05)' }}>
-                    myResume PRO
+                    MeraResume PRO
                   </th>
                   <th className="py-3 px-2 text-center text-secondary fw-semibold" style={{ width: '15%' }}>Generic Builders</th>
                   <th className="py-3 px-2 text-center text-secondary fw-semibold" style={{ width: '15%' }}>Word Templates</th>
@@ -606,7 +598,7 @@ export function LandingPage({ onSelectTemplate, onSelectSample, onOpenSmartParse
                     <td className="py-2.5 px-4 fw-semibold text-dark small">{item.feature}</td>
                     <td className="py-2.5 px-3 text-center fw-bold" style={{ color: '#ff6b00', backgroundColor: 'rgba(255, 107, 0, 0.05)', fontSize: '12px' }}>
                       <span className="d-inline-flex align-items-center gap-1.5">
-                        <CheckCircle2 size={16} /> {item.myResume}
+                        <CheckCircle2 size={16} /> {item.meraResume}
                       </span>
                     </td>
                     <td className="py-2.5 px-2 text-center small text-secondary">
@@ -709,11 +701,11 @@ export function LandingPage({ onSelectTemplate, onSelectSample, onOpenSmartParse
       <footer className="py-4 border-top bg-white position-relative z-1" style={{ borderColor: '#e2e8f0' }}>
         <div className="container fluid-screen-padding d-flex flex-column flex-md-row align-items-center justify-content-between gap-2.5 text-secondary small text-center text-md-start">
           <div className="d-flex align-items-center gap-2 justify-content-center">
-            <span className="fw-extrabold text-dark">my<span style={{ color: '#ff6b00' }}>Resume</span></span>
+            <span className="fw-extrabold text-dark">mera<span style={{ color: '#ff6b00' }}>Resume</span></span>
             <span>• Universal ATS & CV Studio</span>
           </div>
           <div>
-            © 2026 myResume. All rights reserved.
+            © 2026 MeraResume. All rights reserved.
           </div>
         </div>
       </footer>
