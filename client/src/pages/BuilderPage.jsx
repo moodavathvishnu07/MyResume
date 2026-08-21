@@ -50,7 +50,7 @@ import { SmartParserModal } from '../components/Modals/SmartParserModal';
 
 import { exportResumeToDocx } from '../utils/docxHelper';
 import { exportResumeToCsv } from '../utils/csvHelper';
-import { printResume } from '../utils/pdfHelper';
+import { printResume, downloadDirectPdf } from '../utils/pdfHelper';
 
 const ORDERED_SECTIONS = [
   'personal',
@@ -164,7 +164,16 @@ export function BuilderPage({
     }
   };
 
-  const handleExportPdf = () => {
+  const handleExportPdf = async () => {
+    try {
+      await downloadDirectPdf('resume-print-sheet', resume.personalInfo?.fullName || 'Resume');
+    } catch (err) {
+      console.error('Error downloading PDF:', err);
+      printResume();
+    }
+  };
+
+  const handlePrint = () => {
     printResume();
   };
 
@@ -414,10 +423,24 @@ export function BuilderPage({
                       }}
                       className="btn btn-light w-100 text-start d-flex align-items-center gap-2 p-2 rounded-2 border-0 mb-1"
                     >
-                      <Printer size={15} className="text-danger" />
+                      <Download size={15} className="text-danger" />
                       <div>
-                        <div className="text-dark fw-bold" style={{ fontSize: '12px' }}>PDF Document</div>
-                        <small className="text-secondary d-block" style={{ fontSize: '9.5px' }}>Standard vector print</small>
+                        <div className="text-dark fw-bold" style={{ fontSize: '12px' }}>Download PDF (.pdf)</div>
+                        <small className="text-secondary d-block" style={{ fontSize: '9.5px' }}>Direct high-res file + live links</small>
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setExportOpen(false);
+                        handlePrint();
+                      }}
+                      className="btn btn-light w-100 text-start d-flex align-items-center gap-2 p-2 rounded-2 border-0 mb-1"
+                    >
+                      <Printer size={15} style={{ color: '#0071e3' }} />
+                      <div>
+                        <div className="text-dark fw-bold" style={{ fontSize: '12px' }}>Print / Save as PDF</div>
+                        <small className="text-secondary d-block" style={{ fontSize: '9.5px' }}>Native vector browser print</small>
                       </div>
                     </button>
 
@@ -430,8 +453,8 @@ export function BuilderPage({
                     >
                       <FileType size={15} style={{ color: '#ff6b00' }} />
                       <div>
-                        <div className="text-dark fw-bold" style={{ fontSize: '12px' }}>Word (.DOCX)</div>
-                        <small className="text-secondary d-block" style={{ fontSize: '9.5px' }}>Office OpenXML</small>
+                        <div className="text-dark fw-bold" style={{ fontSize: '12px' }}>Word Document (.DOCX)</div>
+                        <small className="text-secondary d-block" style={{ fontSize: '9.5px' }}>Office OpenXML + links</small>
                       </div>
                     </button>
 

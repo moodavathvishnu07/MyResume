@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { exportResumeToCsv, parseResumeCsv } from '../../utils/csvHelper';
 import { exportResumeToDocx } from '../../utils/docxHelper';
-import { printResume } from '../../utils/pdfHelper';
+import { printResume, downloadDirectPdf } from '../../utils/pdfHelper';
 import { saveAs } from 'file-saver';
 
 export function ImportExportModal({ resume, onImport, isOpen, onClose }) {
@@ -23,6 +23,7 @@ export function ImportExportModal({ resume, onImport, isOpen, onClose }) {
   const [importJsonText, setImportJsonText] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+  const [isExportingPdf, setIsExportingPdf] = useState(false);
   const fileInputRef = useRef(null);
 
   if (!isOpen) return null;
@@ -30,7 +31,23 @@ export function ImportExportModal({ resume, onImport, isOpen, onClose }) {
   const candidateName = resume.personalInfo?.fullName || 'Resume';
 
   // Export Handlers
-  const handleExportPdf = () => {
+  const handleDirectDownloadPdf = async () => {
+    setIsExportingPdf(true);
+    setErrorMsg('');
+    setSuccessMsg('Rendering high-resolution PDF document...');
+    try {
+      await downloadDirectPdf('resume-print-sheet', candidateName);
+      setSuccessMsg('PDF downloaded successfully with active hyperlinks!');
+    } catch (err) {
+      console.error(err);
+      setErrorMsg('PDF canvas error, opening browser print...');
+      printResume();
+    } finally {
+      setIsExportingPdf(false);
+    }
+  };
+
+  const handlePrintPdf = () => {
     printResume();
     onClose();
   };
@@ -213,26 +230,49 @@ ${(resume.skills || []).map(s => `${s.category}: ${(s.items || []).join(', ')}`)
               All exported files (PDF & DOCX) retain active, clickable links for LinkedIn, GitHub, and Portfolio.
             </p>
 
-            {/* 1. PDF Export */}
+            {/* 1. Direct PDF Download */}
             <div
-              onClick={handleExportPdf}
+              onClick={handleDirectDownloadPdf}
               className="p-3 rounded-3 bg-white border mb-2 d-flex align-items-center justify-content-between hover-shadow cursor-pointer transition"
-              style={{ borderColor: 'rgba(15, 23, 42, 0.1)', cursor: 'pointer' }}
+              style={{ borderColor: '#cbd5e1', cursor: 'pointer' }}
             >
               <div className="d-flex align-items-center gap-3">
                 <div
                   className="rounded-3 d-flex align-items-center justify-content-center text-danger"
                   style={{ width: '38px', height: '38px', backgroundColor: 'rgba(239, 68, 68, 0.1)' }}
                 >
+                  <Download size={18} />
+                </div>
+                <div>
+                  <div className="fw-bold small text-dark">Download PDF File (.pdf)</div>
+                  <small className="text-secondary" style={{ fontSize: '11px' }}>High-res 300 DPI document + live hyperlinks</small>
+                </div>
+              </div>
+              <span className="badge rounded-pill bg-warning text-white fw-bold font-monospace" style={{ fontSize: '10px', backgroundColor: '#ff6b00' }}>
+                {isExportingPdf ? 'Generating...' : 'Instant'}
+              </span>
+            </div>
+
+            {/* 2. Native Print / Save as PDF */}
+            <div
+              onClick={handlePrintPdf}
+              className="p-3 rounded-3 bg-white border mb-2 d-flex align-items-center justify-content-between hover-shadow cursor-pointer transition"
+              style={{ borderColor: '#cbd5e1', cursor: 'pointer' }}
+            >
+              <div className="d-flex align-items-center gap-3">
+                <div
+                  className="rounded-3 d-flex align-items-center justify-content-center"
+                  style={{ width: '38px', height: '38px', backgroundColor: 'rgba(0, 113, 227, 0.1)', color: '#0071e3' }}
+                >
                   <Printer size={18} />
                 </div>
                 <div>
-                  <div className="fw-bold small text-dark">Print / Download PDF</div>
-                  <small className="text-secondary" style={{ fontSize: '11px' }}>High-res vector print with active hyperlinks</small>
+                  <div className="fw-bold small text-dark">Print / Save as PDF</div>
+                  <small className="text-secondary" style={{ fontSize: '11px' }}>Crisp vector print via browser dialog</small>
                 </div>
               </div>
-              <span className="badge rounded-pill bg-warning text-dark font-monospace" style={{ fontSize: '10px' }}>
-                Recommended
+              <span className="badge rounded-pill bg-light text-secondary border font-monospace" style={{ fontSize: '10px' }}>
+                Vector
               </span>
             </div>
 

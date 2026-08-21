@@ -189,10 +189,10 @@ export function Navbar({
                   }}
                   className="btn btn-light w-100 text-start d-flex align-items-center gap-2.5 p-2 rounded-2 border-0 mb-1"
                 >
-                  <Printer size={16} className="text-danger" />
+                  <Download size={16} className="text-danger" />
                   <div>
-                    <div className="text-dark fw-bold" style={{ fontSize: '12px' }}>Print / PDF Document</div>
-                    <small className="text-secondary d-block" style={{ fontSize: '10px' }}>Crisp vector print & live links</small>
+                    <div className="text-dark fw-bold" style={{ fontSize: '12px' }}>Download PDF (.pdf)</div>
+                    <small className="text-secondary d-block" style={{ fontSize: '10px' }}>Direct file download with clickable links</small>
                   </div>
                 </button>
 
