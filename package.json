@@ -1,0 +1,15 @@
+{
+  "name": "resume-builder-workspace",
+  "version": "1.0.0",
+  "description": "Full-stack ProResume Studio — React + Express.js",
+  "scripts": {
+    "server": "cd server && npm start",
+    "client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:standalone": "docker build -t myresume-app . && docker run -p 8080:5000 myresume-app"
+  }
+}
