@@ -28,11 +28,28 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/parse', parserRoutes);
 app.use('/api/export', exportRoutes);
 
-// Static Client Serving (Production / Standalone Docker)
-const path = require('path');
-const fs = require('fs');
-const clientDistPath = path.join(__dirname, 'dist');
-const altClientDistPath = path.join(__dirname, '../client/dist');
+// Explicit SEO routes for Robots & Sitemap with correct Content-Type headers
+app.get('/robots.txt', (req, res) => {
+  const filePath = fs.existsSync(path.join(clientDistPath, 'robots.txt'))
+    ? path.join(clientDistPath, 'robots.txt')
+    : path.join(altClientDistPath, 'robots.txt');
+  res.type('text/plain');
+  if (fs.existsSync(filePath)) {
+    return res.sendFile(filePath);
+  }
+  res.send("User-agent: *\nAllow: /\nSitemap: https://meraresume.onrender.com/sitemap.xml\n");
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  const filePath = fs.existsSync(path.join(clientDistPath, 'sitemap.xml'))
+    ? path.join(clientDistPath, 'sitemap.xml')
+    : path.join(altClientDistPath, 'sitemap.xml');
+  res.type('application/xml');
+  if (fs.existsSync(filePath)) {
+    return res.sendFile(filePath);
+  }
+  res.status(404).send('Sitemap not found');
+});
 
 if (fs.existsSync(clientDistPath)) {
   app.use(express.static(clientDistPath));
