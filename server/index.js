@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
+const fs = require('fs');
 const resumeRoutes = require('./routes/resume');
 const aiRoutes = require('./routes/aiAssistant');
 const parserRoutes = require('./routes/parser');
@@ -7,6 +9,9 @@ const exportRoutes = require('./routes/export');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const clientDistPath = path.join(__dirname, 'dist');
+const altClientDistPath = path.join(__dirname, '../client/dist');
+
 
 // Middleware
 app.use(cors());
