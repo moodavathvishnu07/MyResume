@@ -33,27 +33,67 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/parse', parserRoutes);
 app.use('/api/export', exportRoutes);
 
-// Explicit SEO routes for Robots & Sitemap with correct Content-Type headers
+const defaultRobotsTxt = `User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+Sitemap: https://meraresume.onrender.com/sitemap.xml
+`;
+
+const defaultSitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://meraresume.onrender.com/</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://meraresume.onrender.com/resume</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://meraresume.onrender.com/smartresume</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>`;
+
+// Explicit SEO routes for Robots & Sitemap with guaranteed delivery
 app.get('/robots.txt', (req, res) => {
-  const filePath = fs.existsSync(path.join(clientDistPath, 'robots.txt'))
-    ? path.join(clientDistPath, 'robots.txt')
-    : path.join(altClientDistPath, 'robots.txt');
-  res.type('text/plain');
-  if (fs.existsSync(filePath)) {
-    return res.sendFile(filePath);
+  const possiblePaths = [
+    path.join(clientDistPath, 'robots.txt'),
+    path.join(altClientDistPath, 'robots.txt'),
+    path.join(__dirname, '../client/public/robots.txt')
+  ];
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      return res.type('text/plain; charset=utf-8').sendFile(path.resolve(p));
+    }
   }
-  res.send("User-agent: *\nAllow: /\nSitemap: https://meraresume.onrender.com/sitemap.xml\n");
+  res.type('text/plain; charset=utf-8').send(defaultRobotsTxt);
 });
 
 app.get('/sitemap.xml', (req, res) => {
-  const filePath = fs.existsSync(path.join(clientDistPath, 'sitemap.xml'))
-    ? path.join(clientDistPath, 'sitemap.xml')
-    : path.join(altClientDistPath, 'sitemap.xml');
-  res.type('application/xml');
-  if (fs.existsSync(filePath)) {
-    return res.sendFile(filePath);
+  const possiblePaths = [
+    path.join(clientDistPath, 'sitemap.xml'),
+    path.join(altClientDistPath, 'sitemap.xml'),
+    path.join(__dirname, '../client/public/sitemap.xml')
+  ];
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      return res.type('application/xml; charset=utf-8').sendFile(path.resolve(p));
+    }
   }
-  res.status(404).send('Sitemap not found');
+  res.type('application/xml; charset=utf-8').send(defaultSitemapXml);
 });
 
 if (fs.existsSync(clientDistPath)) {
